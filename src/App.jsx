@@ -1,67 +1,22 @@
-import React from 'react'
-import { useEffect , useState } from 'react'
-import Categories from './components/categories/Categories'
-import { nanoid } from 'nanoid'
-import './App.scss'
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+import Categories from "./components/categories/Categories"
+import { useLoaderData } from "react-router-dom"
 
 
-function App() {
+export default function App(){
 
-  const categoriesList = [
-    {
-      'id': nanoid(),
-      'title': 'Produits laitiers',
-      'imgUrl': '../public/produit-laitiers.jpg',
-      
-    },
-    {
-      'id': nanoid(),
-      'title': 'Viandes',
-      'imgUrl': '../public/viandes.jpg',
-    },
-    {
-      'id': nanoid(),
-      'title': 'Fruits & légumes',
-      'imgUrl': '../public/fruits-legumes.jpg',
-    },
-    {
-      'id': nanoid(),
-      'title': 'Epicerie salée',
-      'imgUrl': '../public/epice-salee.jpg',
-    },
-    {
-      'id': nanoid(),
-      'title': 'Epicerie sucrée',
-      'imgUrl': '../public/epice-sucree.jpg',
-    },
-    {
-      'id': nanoid(),
-      'title': 'Surgelés',
-      'imgUrl': '../public/surgeles.jpg',
-    },
-    {
-      'id': nanoid(),
-      'title': 'Boissons', 
-      'imgUrl': '../public/boissons.jpg',
+  const categoriesList = useLoaderData()
 
-    },
-    {
-      'id': nanoid(),
-      'title': 'Hygiène & bien-être',
-      'imgUrl': '../public/hygiene.jpg',
-    },
-    {
-      'id': nanoid(),
-      'title': 'Entretien & accesoires',
-      'imgUrl': '../public/entretien.jpg',
-    },
-  ]
-
-  return (
-    <div>
-      <Categories categoriesList={categoriesList}/>
-    </div>
+  return ( 
+    <>
+      <Navbar  categoriesList={categoriesList}/>
+      <section className="body-Container">
+        <Categories categoriesList={categoriesList}/>
+        <div className="outletStyle">
+          <Outlet />
+        </div>
+      </section>
+    </>
   )
 }
-
-export default App
