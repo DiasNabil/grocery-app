@@ -43,11 +43,36 @@
         align-items: center;
         justify-content: center;
         gap: 1rem;
-
-        .bx{
-            color: #505050;
-            font-size: 1.5rem;
+        .cart-icon-container{
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
+
+            .bx{
+                color: #505050;
+                font-size: 2rem;
+                cursor: pointer;
+            }
+    
+            span{
+                position: absolute;
+                top: -2px;
+                right: -5px;
+                background-color: #505050;
+                border-radius: 100%;
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                padding: 5px;
+                color: white;
+                font-size: 0.7rem;
+                font-weight: bold;
+            }
         }
     }
 }

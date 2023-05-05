@@ -1,33 +1,51 @@
-import { Form } from 'react-router-dom'
+import { Form , useSubmit } from 'react-router-dom'
+import { useState } from 'react'
+import { useContext } from 'react'
+import { ProductsContext } from '../Context/ProductsContext'
 
 export default function Searchbar({categoriesList}){
 
+    const[isSearch , setSearch] = useState('')
+    const[isCategory, setCategory] = useState('')
+    const products = useContext(ProductsContext)
+    let submit = useSubmit()
+
+    function handleSearch(event){
+        setSearch(prev => event.target.value)
+        submit(event.currentTarget.form)
+    }
+
+    function handleSelect(event){
+        setCategory(prev => event.target.value)
+    }
+
+
     return (
 
-        <Form className='search-container'>
+        <Form className='search-container' method="post" action='./product'>
                 <input 
                 type='text'
                 placeholder='Je recherche ...'
-                //onChange={}
-                name='searchBar'
+                onChange={(event)=>handleSearch(event)}
+                name='search'
                 className='searchBar'
-                //ajouter une icone de recherche
-                //value={} setState pour controler l'input
+                value={isSearch} 
                 />
 
                 <select 
-                    //onChange={} 
-                    //value={} initier un state pour controller cette valeur 
+                    onChange={(event)=>handleSelect(event)} 
+                    value={isCategory} 
                     className='select-category'
+                    name='category'
                 >
                 <option value='' >Choisir une catégorie</option>
                 {categoriesList.map(category => {
                     return (
-                        <option key={category.id} value={category.name}>{category.name}</option>
+                        <option key={category.id} value={category.id}>{category.name}</option>
                     )
                 })}
                 </select>
             
-            </Form>
+        </Form>
     )
 }

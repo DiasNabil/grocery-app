@@ -1,5 +1,4 @@
 import React from 'react'
-import Hero from '../../components/Hero-section/Hero'
 import Products from '../../components/Products/Products'
 import './Category.scss'
 import { useLoaderData} from "react-router-dom"

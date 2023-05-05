@@ -9,6 +9,7 @@ export default function Products({products}){
     return (
         <div className='products-section'>
             {location.pathname === '/' && <h2>Tous nos produits</h2>}
+            {location.pathname.includes('product') && <h2>{`Resultat : ${products.length}`}</h2>}
             <div className='products-container'>
 
                 {

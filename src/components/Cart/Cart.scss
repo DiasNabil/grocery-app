@@ -1,0 +1,105 @@
+
+.filter{
+    background-color: rgba(0, 0, 0,0);
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: -1;
+    transition: all 300ms;
+}
+    .displayed{
+        z-index: 98;
+        background-color: rgba(0, 0, 0,0.5);
+    }
+
+
+.cart-dropdown-container{
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 40vw;
+    z-index: 99;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .cart-dropdown-navbar{
+        
+        width: 100%;
+        height: 15vh;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2rem;
+
+        h3{
+            font-size: 1.5rem;
+            font-weight: bolder;
+        }
+
+        .bx-x{
+            font-size: 2.5rem;
+            cursor: pointer;
+        }
+    }
+
+    .total{
+        background-color: #F7F7F7;
+        width: 100%;
+        height: 3rem;
+        padding: 0 2rem;
+        margin: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        p{
+            color: #333333;
+        }
+
+        span{
+            font-weight: bolder;
+        }
+    }
+
+    .cart-items{
+        width: 100%;
+        height: 60vh;
+        padding: 0 2rem;
+        overflow-y: scroll;
+        scroll-behavior: none;
+        &::-webkit-scrollbar{
+            display: none;
+        }
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .empty{
+            font-size: 1.25rem;
+            margin: 1rem;
+        }
+    }
+
+    button{
+        border: none;
+        width: 90%;
+        height: 2.5rem;
+ 
+        border-radius: 5px;
+        background-color: rgba(0, 0, 0,0.8);
+        color: white;
+        font-weight: bolder;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    transform: translateX(100%);
+    transition: all 500ms;
+}
+    .slide{
+        transform: translateX(0%);
+    }

@@ -6,10 +6,15 @@ import { createBrowserRouter , RouterProvider} from 'react-router-dom'
 import App from './App'
 import Home from './routes/home/Home'
 import Category from './routes/category/Category'
+import SearchedProduct from './routes/searchedProduct/SearchedProduct'
 
-import { loader as categoriesLoader } from './components/categories/Categories'
+import Categories, { loader as categoriesLoader } from './components/categories/Categories'
 import { loader as homePageLoader } from './routes/home/Home'
-import { loader as productsLoader } from './routes/category/Category'
+import { loader as categoryLoader } from './routes/category/Category'
+import { loader as productsLoader } from './routes/searchedProduct/SearchedProduct'
+import { action as productsAction } from './routes/searchedProduct/SearchedProduct'
+import PreLoader from './components/PreLoader/PreLoader'
+import { CategoriesProviders } from './components/Context/CategoriesContext'
 
 
 const router = createBrowserRouter([
@@ -24,8 +29,14 @@ const router = createBrowserRouter([
                 loader: homePageLoader
             },
             {
-                path: 'category/:category',
+                path: 'categories/:category',
                 element: <Category />,
+                loader: categoryLoader
+            },
+            {
+                path: 'product/',
+                element: <SearchedProduct />,
+                action: productsAction,
                 loader: productsLoader
             }
         ]
@@ -33,5 +44,10 @@ const router = createBrowserRouter([
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <RouterProvider router={router} />
+
+        <RouterProvider 
+            router={router}
+            fallbackElement={<PreLoader/>} 
+        />
+
 )

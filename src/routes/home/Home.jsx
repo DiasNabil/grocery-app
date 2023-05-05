@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Hero from '../../components/Hero-section/Hero'
 import Products from '../../components/Products/Products'
+import { ProductsContext } from '../../components/Context/ProductsContext'
 import './Home.scss'
 import { useLoaderData } from "react-router-dom"
 
@@ -26,7 +27,8 @@ export async function loader(){
 export default function Home() {
   let data = useLoaderData()
   let homePage = data.contentPage.fields
-  let products = data.allProducts
+ 
+  let products = useContext(ProductsContext)
 
   return (
     <>

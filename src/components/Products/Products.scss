@@ -20,7 +20,7 @@
     
         .product-container{
             position: relative;
-            
+
             .addToCart{
                 position: absolute;
                 right: 0;
@@ -37,21 +37,21 @@
                 cursor: pointer;
                 transition: all 1s;
                 font-size: 1.05rem;
+                
+                span{
+                    padding: 0 5px;
+                }
+
 
                 .cartButton{
                     padding: 0 5px;
                 }
-
+            
                 .none{
                     display: none;
                 }
             }
-
-            .filter{
-                //opacity: 0.5;
-                //transform: scale(0.95);
-                
-            }
+            
             .product-cart{
                 border-radius: 5px;
                 flex: none;

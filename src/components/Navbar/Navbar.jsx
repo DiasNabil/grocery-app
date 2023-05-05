@@ -1,9 +1,21 @@
 import './Navbar.scss'
-import { Link } from 'react-router-dom'
+import CartIcon from './Cart-icon'
 import Searchbar from './Searchbar'
+import CartDropDown from '../Cart/CartDropdown'
 
-export default function Navbar({categoriesList}) {
+import { Link } from 'react-router-dom'
+import { CartContext } from '../Context/CartContext'
+import { useContext } from 'react'
+import { ToggleCartContext} from '../Context/ToggleCartContext'
+import { CategoriesContext } from '../Context/CategoriesContext'
 
+
+export default function Navbar() {
+
+    const categoriesList = useContext(CategoriesContext)
+    const { cart } = useContext(CartContext)
+    const {toggleCart, setToggleCart} = useContext(ToggleCartContext)
+    
     return(
         <nav className='navbar'>
             <Link to='/' >
@@ -12,10 +24,11 @@ export default function Navbar({categoriesList}) {
 
             <Searchbar categoriesList={categoriesList}/>
 
-            <div className='icons-nav'>
-                <i className='bx bx-user'></i>
-                <i className='bx bx-cart-alt cart' /**ajouter une autre icon pour panier remplis <i class='bx bxs-cart-alt' ></i> */></i>
+            <div className='icons-nav' onClick={()=> setToggleCart(true)}>
+                <CartIcon cart={cart} />
             </div>
+
+            <CartDropDown toggleCart={toggleCart} setToggleCart={setToggleCart} />
         </nav>
     )
 }

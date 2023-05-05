@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import './categories.scss'
+import { CategoriesContext } from '../Context/CategoriesContext'
+import { useContext } from 'react'
 
 
 export async function loader(){
@@ -10,7 +12,9 @@ export async function loader(){
     return categoriesList
   } 
 
-export default function Categories({categoriesList}){
+export default function Categories(){
+
+    let categoriesList = useContext(CategoriesContext)
 
     return (
         <ul className='categories-container'>
@@ -19,7 +23,7 @@ export default function Categories({categoriesList}){
             {categoriesList.map((category) =>{
             return(
                 <li key={category.id}>
-                    <NavLink to={`/category/${category.id}`} className='category-name' > {category.name} </NavLink>
+                    <NavLink to={`/categories/${category.id}`} className='category-name' > {category.name} </NavLink>
                 </li>
             )
             })}
