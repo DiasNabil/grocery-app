@@ -1,15 +1,14 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Hero from '../../components/Hero-section/Hero'
 import Products from '../../components/Products/Products'
-import { ProductsContext } from '../../components/Context/ProductsContext'
 import './Home.scss'
 import { useLoaderData } from "react-router-dom"
 
 export async function loader(){
 
   let [contentPage , allProducts] = await Promise.all([
-    fetch('http://localhost/projets/api-wp/wp-json/api/pages/134'),
-    fetch('http://localhost/projets/api-wp/wp-json/api/product/')
+    fetch('http://projets.local/api-wp/wp-json/api/pages/237'),
+    fetch('http://projets.local/api-wp/wp-json/api/product/')
   ])
 
   contentPage = await contentPage.json()
@@ -27,8 +26,7 @@ export async function loader(){
 export default function Home() {
   let data = useLoaderData()
   let homePage = data.contentPage.fields
- 
-  let products = useContext(ProductsContext)
+  let products = data.allProducts
 
   return (
     <>

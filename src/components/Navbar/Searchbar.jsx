@@ -1,14 +1,13 @@
-import { Form , useSubmit } from 'react-router-dom'
+import { Form , useNavigation, useSubmit } from 'react-router-dom'
 import { useState } from 'react'
-import { useContext } from 'react'
-import { ProductsContext } from '../Context/ProductsContext'
 
 export default function Searchbar({categoriesList}){
 
     const[isSearch , setSearch] = useState('')
     const[isCategory, setCategory] = useState('')
-    const products = useContext(ProductsContext)
+
     let submit = useSubmit()
+    const nav = useNavigation()
 
     function handleSearch(event){
         setSearch(prev => event.target.value)

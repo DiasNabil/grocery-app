@@ -1,11 +1,15 @@
+import { useContext } from 'react'
 import './Cart.scss'
+import { CartContext } from '../Context/CartContext'
+import CartItems from './CartItems'
 
 export default function CartDropDown({toggleCart , setToggleCart}){
-
+    const {cart} = useContext(CartContext)
+    const itemsInCart = cart ? cart.products : []
 
 
     return (
-        <div className={`filter ${toggleCart && 'displayed'}`} onClick={()=>{setToggleCart(false)}}>
+        <div className={`filter ${toggleCart && 'displayed'}`} /**onClick={()=>{setToggleCart(false)}}*/>
             <div className={`cart-dropdown-container ${toggleCart && 'slide'}`}>
                 <div className="cart-dropdown-navbar">
                     <h3>Panier</h3>
@@ -13,12 +17,14 @@ export default function CartDropDown({toggleCart , setToggleCart}){
                 </div>
                 <div className="total">
                     <p>Total: </p>
-                    <span>0.00 KMF</span>
+                    <span>{cart ? cart.totalProductsPrice : '0'} KMF</span>
                 </div>
-                <div className="cart-items">
-                    <p className="empty">Votre Panier est vide</p>
-                </div>
-                <button onClick={()=>{setToggleCart(false)}}>Commencer mes achats</button>
+                <CartItems  items={itemsInCart}/>
+                {
+                    itemsInCart.length > 0 ? 
+                    <button className='cartButton'>Valider mon panier</button> :
+                    <button className='cartButton' onClick={()=>{setToggleCart(false)}}>Commencer mes achats</button>
+                }
             </div>
         </div>
     )

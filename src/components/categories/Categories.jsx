@@ -1,20 +1,18 @@
 import { NavLink } from 'react-router-dom'
 import './categories.scss'
-import { CategoriesContext } from '../Context/CategoriesContext'
-import { useContext } from 'react'
 
 
 export async function loader(){
     
-    let res = await fetch('http://localhost/projets/api-wp/wp-json/api/category/')
+    let res = await fetch('http://projets.local/api-wp/wp-json/api/category/')
     let categoriesList = await res.json()
 
     return categoriesList
   } 
 
-export default function Categories(){
+export default function Categories({categoriesList}){
 
-    let categoriesList = useContext(CategoriesContext)
+    
 
     return (
         <ul className='categories-container'>

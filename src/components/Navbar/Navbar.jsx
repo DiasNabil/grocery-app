@@ -3,16 +3,15 @@ import CartIcon from './Cart-icon'
 import Searchbar from './Searchbar'
 import CartDropDown from '../Cart/CartDropdown'
 
-import { Link } from 'react-router-dom'
+import { Link, useLoaderData } from 'react-router-dom'
 import { CartContext } from '../Context/CartContext'
 import { useContext } from 'react'
 import { ToggleCartContext} from '../Context/ToggleCartContext'
 import { CategoriesContext } from '../Context/CategoriesContext'
 
 
-export default function Navbar() {
+export default function Navbar({categoriesList}) {
 
-    const categoriesList = useContext(CategoriesContext)
     const { cart } = useContext(CartContext)
     const {toggleCart, setToggleCart} = useContext(ToggleCartContext)
     
@@ -28,7 +27,7 @@ export default function Navbar() {
                 <CartIcon cart={cart} />
             </div>
 
-            <CartDropDown toggleCart={toggleCart} setToggleCart={setToggleCart} />
+            <CartDropDown toggleCart={toggleCart} setToggleCart={setToggleCart} cart={cart} />
         </nav>
     )
 }

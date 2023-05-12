@@ -7,7 +7,7 @@ import { ProductsContext } from "../../components/Context/ProductsContext"
 
 export async function action({request}){
     
-    const res = await fetch('http://localhost/projets/api-wp/wp-json/api/product/')
+    const res = await fetch('http://projets.local/api-wp/wp-json/api/product/')
     const arrProducts = await res.json ()
     const data = Object.fromEntries(await request.formData())
     data.search = data.search.trim()
@@ -32,7 +32,7 @@ export async function action({request}){
 
 export async function loader(){
 
-    const res = await fetch('http://localhost/projets/api-wp/wp-json/api/product/')
+    const res = await fetch('http://projets.local/api-wp/wp-json/api/product/')
 
     const allProducts = await res.json()
     

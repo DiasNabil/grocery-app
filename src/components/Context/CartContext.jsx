@@ -7,14 +7,17 @@ export const CartContext = createContext({
     setCart : () => null
 })
 
-export function CartProvider ({children}) {
+
+export function CartProvider ({children}) {  
     
     const [cart, setCart] = useState(null)
 
+
+
     useEffect(()=>{
         if(process.browser){
-            let cartData = localStorage.getItem('cart')
-            cartData = null !== cartData ? JSON.parse(cartData) : ''
+            let cartData = localStorage.getItem('jaimetous-cart')
+            cartData = cartData !== null ? JSON.parse(cartData) : null
             setCart(cartData)
         }
     }, [])

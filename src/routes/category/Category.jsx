@@ -1,11 +1,10 @@
-import React from 'react'
 import Products from '../../components/Products/Products'
 import './Category.scss'
-import { useLoaderData} from "react-router-dom"
+import { useLoaderData } from 'react-router-dom'
 
 export async function loader({params}){
     
-    let res = await fetch(`http://localhost/projets/api-wp/wp-json/api/category/${params.category}`)
+    let res = await fetch(`http://projets.local/api-wp/wp-json/api/category/${params.category}`)
     let data = await res.json()
     let category = data[0]
 
@@ -15,11 +14,7 @@ export async function loader({params}){
   } 
 
 export default function Category() {
-  let category= useLoaderData()
-
-
-
-
+  let category = useLoaderData()
 
   return (
     

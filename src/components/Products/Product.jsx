@@ -5,7 +5,9 @@ import './Products.scss'
 
 
 export default function Product({product}){
+
     const [isClicked, setIsClicked] = useState(false)
+
     if(product.stock !== 'outofstock'){
 
         return(
@@ -14,7 +16,7 @@ export default function Product({product}){
                 <AddToCartButton  isClicked={isClicked} product={product}/>
 
                 <div  className={`product-cart`} >
-                    <div className={`product-img` }>
+                    <div className={`product-img`}>
                         <img src={product.image}/>
                     </div>
                     <div className='text'>
