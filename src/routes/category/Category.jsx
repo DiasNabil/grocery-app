@@ -1,34 +1,30 @@
+import { useContext } from 'react'
 import Products from '../../components/Products/Products'
 import './Category.scss'
-import { useLoaderData } from 'react-router-dom'
-
-export async function loader({params}){
-    
-    let res = await fetch(`http://projets.local/api-wp/wp-json/api/category/${params.category}`)
-    let data = await res.json()
-    let category = data[0]
-
-    console.log('category : ')
-    console.log(category)
-    return category
-  } 
+import { useParams } from 'react-router-dom'
+import { AppContext } from '../../components/Context/AppContext'
+import PreLoader from '../../components/PreLoader/PreLoader'
 
 export default function Category() {
-  let category = useLoaderData()
+  const params = useParams()
+  const {categories} = useContext(AppContext)
+  let category = categories.find(cat => cat.id == params.category)
 
-  return (
+  if(category){
+    return (
     
-    <>
-        <div className='hero-category' style={{
-            backgroundImage: `url(${category.img})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-        }} >
-            <h1>{category.name}</h1>
-        </div>
-
-        <Products products={category.products}/>
-    </>
-  )
+      <>
+          <div className='hero-category' style={{
+              backgroundImage: `url(${category.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+          }} >
+              <h1>{category.name}</h1>
+          </div>
+  
+          <Products products={category.products}/>
+      </>
+    )
+  }
 }
 

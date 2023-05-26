@@ -18,6 +18,7 @@ export default function Products({products}){
                             <Product key={product.id} product={product} location={location}/>
                         )
                     })
+                    
                 }
 
             </div>

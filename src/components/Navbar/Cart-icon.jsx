@@ -2,7 +2,7 @@ import './Navbar.scss'
 
 export default function CartIcon({cart}){
     
-    let cartNumber = cart && cart.totalProductsCount 
+    let cartNumber = cart && cart.products.length 
     return ( 
 
         <div className='cart-icon-container'>

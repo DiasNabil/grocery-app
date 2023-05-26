@@ -17,8 +17,9 @@ export default function CartDropDown({toggleCart , setToggleCart}){
                 </div>
                 <div className="total">
                     <p>Total: </p>
-                    <span>{cart ? cart.totalProductsPrice : '0'} KMF</span>
+                    <span>{cart ? cart.total : '0'} KMF</span>
                 </div>
+                
                 <CartItems  items={itemsInCart}/>
                 {
                     itemsInCart.length > 0 ? 

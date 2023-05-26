@@ -3,11 +3,11 @@ import CartIcon from './Cart-icon'
 import Searchbar from './Searchbar'
 import CartDropDown from '../Cart/CartDropdown'
 
-import { Link, useLoaderData } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { CartContext } from '../Context/CartContext'
 import { useContext } from 'react'
 import { ToggleCartContext} from '../Context/ToggleCartContext'
-import { CategoriesContext } from '../Context/CategoriesContext'
+
 
 
 export default function Navbar({categoriesList}) {

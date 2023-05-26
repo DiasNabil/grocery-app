@@ -1,4 +1,4 @@
-import { Form , useNavigation, useSubmit } from 'react-router-dom'
+import { Form , useSubmit } from 'react-router-dom'
 import { useState } from 'react'
 
 export default function Searchbar({categoriesList}){
@@ -7,7 +7,6 @@ export default function Searchbar({categoriesList}){
     const[isCategory, setCategory] = useState('')
 
     let submit = useSubmit()
-    const nav = useNavigation()
 
     function handleSearch(event){
         setSearch(prev => event.target.value)
@@ -39,9 +38,12 @@ export default function Searchbar({categoriesList}){
                 >
                 <option value='' >Choisir une catégorie</option>
                 {categoriesList.map(category => {
-                    return (
-                        <option key={category.id} value={category.id}>{category.name}</option>
-                    )
+                    if(category.products.length > 0){
+                        return (
+                            <option key={category.id} value={category.id}>{category.name}</option>
+                        )
+                    }
+
                 })}
                 </select>
             
