@@ -3,7 +3,6 @@ import Products from '../../components/Products/Products'
 import './Category.scss'
 import { useParams } from 'react-router-dom'
 import { AppContext } from '../../components/Context/AppContext'
-import PreLoader from '../../components/PreLoader/PreLoader'
 
 export default function Category() {
   const params = useParams()

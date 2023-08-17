@@ -8,12 +8,14 @@ import { useMutation, useQuery } from '@apollo/client'
 export const CartContext = createContext({
     cart : null,
     setCart : () => null,
-
 })
 
 
 export function CartProvider ({children}) {  
     const [cart, setCart] = useState(null)
+    const [input , setInput] = useState({"data" : null , "mutation" : null, 'id': null})
+    const [itemsInCart, setItemsInCart] = useState([])
+
 
     const getCart = useQuery(GET_CART, {
         notifyOnNetworkStatusChange: true,
@@ -29,14 +31,13 @@ export function CartProvider ({children}) {
        }
      })
 
-     const [input , setInput] = useState({"data" : null , "mutation" : null})
-
      const [addToCart] = useMutation(ADD_TO_CART, {
         variables: {
             input: input.data
         },
         onCompleted: ()=>{
             getCart.refetch()
+            setInput({"data" : null , "mutation" : null, 'id': null})
         }, 
      })
 
@@ -49,6 +50,7 @@ export function CartProvider ({children}) {
         },
         onCompleted: ()=>{
             getCart.refetch()
+            setInput({"data" : null , "mutation" : null, 'id': null})
         }
      })
 
@@ -61,6 +63,7 @@ export function CartProvider ({children}) {
         },
         onCompleted: ()=>{
             getCart.refetch()
+            setInput({"data" : null , "mutation" : null, 'id': null})
         }
      })
 
@@ -71,7 +74,7 @@ export function CartProvider ({children}) {
             cartData = cartData !== null ? JSON.parse(cartData) : null
             setCart(cartData)
         }
-    }, [])
+    },[])
 
     useEffect(()=>{
 
@@ -86,15 +89,11 @@ export function CartProvider ({children}) {
         if(input.mutation === "remove"){
             removeToCart()
         }
-
-        if(input.mutation !== null){
-            setInput({"data" : null , "mutation" : null})
-        }
         
     }, [input])
 
     return (
-        <CartContext.Provider value={{cart, setCart, getCart, addToCart, subtractToCart , removeToCart , input , setInput}}> 
+        <CartContext.Provider value={{cart, setCart, input , setInput , itemsInCart , setItemsInCart , getCart, addToCart, subtractToCart , removeToCart}}> 
             {children} 
         </CartContext.Provider>
         )

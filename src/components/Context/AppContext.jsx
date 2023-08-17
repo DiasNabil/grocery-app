@@ -1,6 +1,7 @@
 import {useState , useEffect , createContext} from "react";
 import { useQuery } from "@apollo/client";
-import { CATEGORIES_QUERY, PAGE_QUERY, PRODUCTS_QUERY } from "../../utils/query";
+import { CATEGORIES_QUERY, PRODUCTS_QUERY } from "../../utils/query";
+import { useMediaQuery } from 'react-responsive'
 
 export const AppContext = createContext({
     products: [],
@@ -8,7 +9,9 @@ export const AppContext = createContext({
     categories: [],
     setCategories: () => null,
     isLoading: Boolean,
-    setLoading: () => null
+    setLoading: () => null,
+    Desktop: ()=>null,
+    Mobile: ()=>null,
 })
 
 function formatCategories(data){
@@ -40,31 +43,6 @@ function formatProducts(data){
     return arr
 }
 
-function formatPage(data){
-    let format = {}
-    Object.entries(data.page).forEach(([keyFields , valueFields]) => {
-        if(typeof valueFields === 'object'){
-            format.fields = {...format.fields, [keyFields]: []}
-            Object.entries(valueFields).forEach(([keyArr, valueArr])=>{
-                if(typeof valueArr === 'object'){
-                    if(valueArr){
-                        valueArr.forEach(obj => {
-                            let {titre, texte, image} = obj
-                            image = image = image && image.sourceUrl
-                            format.fields[keyFields] = [...format.fields[keyFields], {titre , texte , image}]
-                        })
-                    }
-                }
-            })
-        }
-    })
-
-    format.id = data.page.databaseId
-    format.title = data.page.title
-
-    return format
-}
-
 
 
 export function AppProvider({children}){
@@ -75,16 +53,17 @@ export function AppProvider({children}){
 
     const getProducts = useQuery(PRODUCTS_QUERY)
     const getCategories = useQuery(CATEGORIES_QUERY)
-    let getPage = null
 
-
-    function pageQuery(id){
-        getPage = useQuery(PAGE_QUERY, {variables: {id: id}})
-        
-        if(!getPage.loading && !getPage.error){
-            return formatPage(getPage.data)
-        }
+    const Desktop = ({ children }) => {
+        const isDesktop = useMediaQuery({ minWidth: 781 })
+        return isDesktop ? children : null
     }
+
+    const Mobile = ({ children }) => {
+        const isMobile = useMediaQuery({ maxWidth: 780 })
+        return isMobile ? children : null
+    }
+
 
     useEffect(()=>{
 
@@ -102,10 +81,8 @@ export function AppProvider({children}){
         
     },[getProducts , getCategories, isLoading])
 
-
-
     return (
-        <AppContext.Provider value={{products , categories , pageQuery , isLoading , setLoading}}>
+        <AppContext.Provider value={{products , categories , isLoading , setLoading, Desktop, Mobile}}>
             {children}
         </AppContext.Provider>
     )

@@ -33,3 +33,24 @@ export function updateQuantity(cart , key){
     return quantity
 }
 
+export function getItemsInCart(products, cart){
+    let arr = []
+
+    if(products && cart){
+        let items = cart.products
+
+        items.forEach(item => {
+            let id = item.product.node.databaseId
+            products.forEach(product => {
+                if(product.id == id) {
+                    product.total = item.total
+                    product.quantity = item.quantity
+                    arr.push(product)
+                }
+            })
+        })
+    }
+
+    return arr
+}
+

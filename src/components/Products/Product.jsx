@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import AddToCartButton from './AddToCartButton'
+import AddToCartButton from '../AddToCart/AddToCartButton'
+import AddToCartLoader from '../AddToCart/AddToCartLoader'
 import './Products.scss'
 
 
@@ -8,16 +9,15 @@ export default function Product({product}){
 
     const [isClicked, setIsClicked] = useState(false)
 
-    if(product.stock !== 'outofstock'){
-
         return(
             <div key={product.id} className='product-container' onClick={()=>{setIsClicked(true)}} onPointerLeave={()=>setIsClicked(false)}>
             
-                <AddToCartButton  isClicked={isClicked} product={product}/>
+                <AddToCartButton isClicked={isClicked} product={product}/>
 
-                <div  className={`product-cart`} >
-                    <div className={`product-img`}>
+                <div  className='product-cart'>
+                    <div className='product-img'>
                         <img src={product.image}/>
+                        <AddToCartLoader id={product.id}/>
                     </div>
                     <div className='text'>
                         <p className='price'>{product.price} KMF</p>
@@ -26,5 +26,4 @@ export default function Product({product}){
                 </div>
             </div>
         )
-    }
 }

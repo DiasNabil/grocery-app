@@ -1,10 +1,12 @@
 import { Form , useSubmit } from 'react-router-dom'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { ToggleContext } from '../Context/ToggleContext'
 
 export default function Searchbar({categoriesList}){
 
     const[isSearch , setSearch] = useState('')
     const[isCategory, setCategory] = useState('')
+    const {toggleSearchBar, setToggleSearchBar} = useContext(ToggleContext)
 
     let submit = useSubmit()
 
@@ -20,7 +22,7 @@ export default function Searchbar({categoriesList}){
 
     return (
 
-        <Form className='search-container' method="post" action='./product'>
+        <Form className={`search-container + ${!toggleSearchBar ? 'none' : null}`} method="post" action='./product'>
                 <input 
                 type='text'
                 placeholder='Je recherche ...'

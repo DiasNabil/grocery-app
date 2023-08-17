@@ -1,14 +1,12 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Categories from "./components/Categories/Categories"
-import { useLoaderData , useNavigation } from "react-router-dom"
 import PreLoader from "./components/PreLoader/PreLoader";
 import { useContext } from "react";
 import { AppContext } from "./components/Context/AppContext";
 
-
-import { CartProvider } from "./components/Context/CartContext";
-import { ToggleCartProvider } from "./components/Context/ToggleCartContext";
+import { ToggleProvider, ToggleContext } from "./components/Context/ToggleContext";
+import { PageProvider } from "./components/Context/PageContext";
 
 
 
@@ -16,6 +14,7 @@ import { ToggleCartProvider } from "./components/Context/ToggleCartContext";
 export default function App(){
 
   const {categories , isLoading} = useContext(AppContext)
+  const {setToggleSearchBar} =  useContext(ToggleContext)
 
   if(isLoading){
     return (
@@ -23,20 +22,23 @@ export default function App(){
     )
   }else
   return ( 
-
-    <CartProvider>
-      
-      <ToggleCartProvider>
+    <>
         <Navbar  categoriesList={categories}/>
-      </ToggleCartProvider>
-      <section className="body-Container">
-        <Categories categoriesList={categories}/>
+      
+
+
+      <section className="body-Container" onClick={()=>{setToggleSearchBar(false)}}>
+
+        <Categories className='categoriesList' categoriesList={categories}/>
+
         <div className="outletStyle">
-          <Outlet />
+          <PageProvider>
+            <Outlet />
+          </PageProvider>
         </div>
+
       </section>
 
-    </CartProvider>
-    
+      </>
   )
 }

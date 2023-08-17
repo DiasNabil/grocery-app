@@ -1,6 +1,7 @@
 .categories-container{
     background-color:#fafafa ;
     width: 30vw;
+    min-width: 400px;
     height: 100vh;
     overflow-y: auto;
     gap: 1.5rem;
@@ -24,4 +25,15 @@
 
     }
 
-  
+    .cat-mobile{
+        position: absolute;
+        z-index: 98;
+        width: 100vw;
+
+        transform: translateX(-100%);
+        transition: all 500ms;
+    }
+
+    .cat-slide{
+        transform: translateX(0%);
+    }

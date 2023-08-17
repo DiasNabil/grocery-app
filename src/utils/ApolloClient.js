@@ -1,6 +1,6 @@
 import clientConfig from './clientConfig'
 import process from "process"
-import { ApolloClient, InMemoryCache, HttpLink ,ApolloProvider, gql, ApolloLink } from '@apollo/client'
+import { ApolloClient, InMemoryCache, HttpLink , ApolloLink } from '@apollo/client'
 
 const link = new HttpLink({
   uri: clientConfig.graphqlUrl,
@@ -21,7 +21,6 @@ const middleware = new ApolloLink((operation , forward) =>{
   }
 
   return forward(operation)
-
 })
 
 // chaque reponse renvoyer par wp passera par ce middleware, check dans l'header de la reponse si il y un token de session woocommerce et le stock/maj dans le localStorage

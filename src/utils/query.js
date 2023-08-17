@@ -1,5 +1,7 @@
 import { gql } from "@apollo/client"
 
+// query 
+
 export const PRODUCTS_QUERY = gql`query getProducts{
     products(first: 100) {
      nodes {
@@ -62,7 +64,10 @@ export const PAGE_QUERY = gql`query getPage($id: ID!){
         image {
           sourceUrl
         }
-        cta
+        cta {
+          texte
+          lien
+        }
       }
     }
     promoActu {
@@ -72,7 +77,10 @@ export const PAGE_QUERY = gql`query getPage($id: ID!){
         image {
           sourceUrl
         }
-        cta
+        cta {
+          texte
+          lien
+        }
       }
     }
   }
@@ -102,6 +110,8 @@ export const GET_CART = gql`query getCart{
     }
   }
 }`
+
+
 
 // mutation
 
@@ -148,6 +158,18 @@ export const UPDATE_CART = gql`mutation updateCart($input: UpdateItemQuantitiesI
         productCount
       }
       isEmpty
+      total(format: RAW)
+    }
+  }
+}`
+
+export const CHECKOUT = gql`mutation checkout($input: CheckoutInput!){
+  checkout(input: $input){
+    result
+    order {
+      id
+      orderKey
+      orderNumber
       total(format: RAW)
     }
   }
